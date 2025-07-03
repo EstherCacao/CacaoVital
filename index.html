@@ -251,12 +251,67 @@
       color: var(--cacao-base);
       margin-bottom: 0.5rem;
     }
+
+/* para ir a tienda */
+/* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--blanco-almendra);
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--verde-natural);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background-color: var(--cacao-base);
+    }
+
+    .close {
+      color: var(--cacao-base);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
   </style>
 </head>
 <body>
   <header class="header">
     <div class="header-content">
-      <a href="#" class="logo">
+      <a href="index.html" class="logo">
         <div class="logo-icon">
           <i class="fas fa-seedling"></i>
         </div>
@@ -271,10 +326,12 @@
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <button class="cart-icon" onclick="toggleCart()">
+<!-- para ir a la tienda -->
+        <button class="cart-icon" onclick="abrirModal()">
           <i class="fas fa-shopping-cart"></i>
-          <span class="cart-count" id="cartCount">0</span>
+          <span class="cart-count" id="cartCount">+</span>
         </button>
+
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
           <i class="fas fa-bars"></i>
         </button>
@@ -322,10 +379,53 @@
     </div>
   </main>
 
+<!-- modal para ir a tienda -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>¿Quieres ver los productos?</h2>
+      <p>Visita nuestra página <strong>Producto</strong> para explorar y comprar.</p>
+      <a href="tienda.html" class="modal-button">Ir a Producto</a>
+    </div>
+  </div>
+
+
+
   <script>
     function toggleMobileMenu() {
       const nav = document.getElementById('mainNav');
       nav.classList.toggle('show');
+    }
+
+// para ir a la tienda
+    function toggleMobileMenu(){
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+    function avisarIrATienda(){
+      alert("Para ver y comprar los productos, por favor visita la página de Producto")
+    }
+
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function abrirModal() {
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    // Cierra el modal si haces clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById("cartModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
     }
   </script>
 </body>

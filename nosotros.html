@@ -441,6 +441,25 @@
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
+
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* 🔒 Importante para que corte el exceso */
+    }
+
+    .logo-img {
+      width: 150%;  /* 🔍 Aumenta el tamaño interno sin tocar el contenedor */
+      height: 150%;
+      object-fit: cover;
+    }
+
   </style>
 </head>
 <body>
@@ -448,7 +467,7 @@
     <div class="header-content">
       <a href="index.html" class="logo">
         <div class="logo-icon">
-          <i class="fas fa-seedling"></i>
+          <img src="Logo.jpg" class="logo-img">
         </div>
         <span class="logo-text">Cacao Vital</span>
       </a>

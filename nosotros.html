@@ -1,0 +1,699 @@
+<!-- PENDIENTES
+* Poner nuestras fotos en "Nuestro equipo, menos en produccion"
+* Que el fondo de "Nuestro equipo sea un campo"
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros - Cacao Vital</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --cacao-base: #5C3A21;
+      --beige-organico: #EDE6DA;
+      --verde-natural: #7A8450;
+      --blanco-almendra: #FAF8F3;
+      --gris-ceniza: #3F3F3F;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--gris-ceniza);
+      background: var(--blanco-almendra);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 248, 243, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(92, 58, 33, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--cacao-base);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-menu li a {
+      text-decoration: none;
+      color: var(--gris-ceniza);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu li a:hover {
+      color: var(--cacao-base);
+    }
+
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--verde-natural);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+
+    .cart-icon {
+      background: var(--verde-natural);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cart-icon:hover {
+      background: var(--cacao-base);
+      transform: scale(1.05);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--cacao-base);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--cacao-base);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        border-top: 1px solid #ddd;
+        padding: 1rem 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--cacao-base), var(--verde-natural));
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .content-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .value-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .value-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--verde-natural);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .value-card h3 {
+      color: var(--cacao-base);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .value-card p {
+      color: var(--gris-ceniza);
+      line-height: 1.6;
+    }
+
+    .team-section {
+      background: var(--beige-organico);
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .team-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .member-info h4 {
+      color: var(--cacao-base);
+      margin-bottom: 0.5rem;
+    }
+
+    .member-role {
+      color: var(--verde-natural);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .location-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .location-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .location-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .location-card {
+      background: var(--blanco-almendra);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 2px solid var(--beige-organico);
+    }
+
+    .location-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--verde-natural);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .location-card h3 {
+      color: var(--cacao-base);
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .content-section {
+        padding: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+/* para ir a tienda */
+/* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--blanco-almendra);
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--verde-natural);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background-color: var(--cacao-base);
+    }
+
+    .close {
+      color: var(--cacao-base);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <span class="logo-text">Cacao Vital</span>
+      </a>
+      <ul class="nav-menu" id="mainNav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html" class="active">Nosotros</a></li>
+        <li><a href="tienda.html">Producto</a></li>
+        <li><a href="proceso.html">Proceso</a></li>
+        <li><a href="beneficios.html">Beneficios</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+<!-- para ir a la tienda -->
+        <button class="cart-icon" onclick="abrirModal()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">+</span>
+        </button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Conoce Cacao Vital</h1>
+      <p>Somos una empresa familiar dedicada a la producción y comercialización de cacao 100% natural, comprometidos con la calidad, la tradición y el bienestar de nuestros clientes.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Nuestra Historia</h2>
+      <p>Cacao Vital nació como una idea a ofrecer un producto rico y saludable, con la visión de ofrecer productos de cacao completamente naturales y libres de conservantes o químicos artificiales. Nuestra empresa surge del amor por las tradiciones culinarias mexicanas y la pasión por brindar alimentos que nutran verdaderamente a las familias.</p>
+      
+      <p>Desde nuestros inicios, hemos trabajado incansablemente para mantener los más altos estándares de calidad en cada uno de nuestros productos. Creemos firmemente que el cacao, siendo un regalo de la naturaleza, debe conservar todas sus propiedades originales y beneficios nutricionales.</p>
+      
+      <p>En Cacao Vital, cada grano de cacao es seleccionado cuidadosamente y procesado de manera artesanal, respetando los métodos tradicionales que han pasado de generación en generación. Nuestro compromiso es contigo y con tu familia, ofreciéndote productos que no solo deleitan el paladar, sino que también contribuyen a una vida más saludable.</p>
+    </section>
+
+    <section class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>100% Natural</h3>
+        <p>Nuestro cacao es completamente natural, sin aditivos, conservantes ni químicos artificiales. Preservamos la pureza original del grano.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Calidad Artesanal</h3>
+        <p>Cada producto es elaborado con métodos tradicionales y artesanales, garantizando la máxima calidad en cada paso del proceso.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Empresa Familiar</h3>
+        <p>Somos una empresa familiar que valora las tradiciones y el trato personalizado con cada uno de nuestros clientes.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Compromiso con la Salud</h3>
+        <p>Nos comprometemos a ofrecer productos que contribuyan al bienestar y la salud de nuestros consumidores.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h3>Sustentabilidad</h3>
+        <p>Practicamos métodos de producción responsables con el medio ambiente y apoyamos a productores locales.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3>Excelencia</h3>
+        <p>Buscamos constantemente la excelencia en todos nuestros procesos, desde la selección hasta la entrega final.</p>
+      </div>
+    </section>
+<br>
+    <section class="team-section">
+      <h2>Nuestro Equipo</h2>
+      <p>Detrás de Cacao Vital hay un equipo de personas apasionadas por la calidad y el servicio excepcional.</p>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="member-info">
+            <h4>Dirección General</h4>
+            <p class="member-role">Liderazgo y Visión</p>
+            <h3>Esther Angeles</h3>
+            <p>Encargada de la visión estratégica y el crecimiento de la empresa, manteniendo siempre nuestros valores fundamentales.</p>
+        </div>
+    </div>
+    
+    <div class="team-member">
+      <div class="member-avatar">
+        <i class="fas fa-handshake"></i>
+      </div>
+      <div class="member-info">
+        <h4>Atención al Cliente</h4>
+        <p class="member-role">Servicio y Soporte</p>
+        <h3>Sergio Ariza</h3>
+        <p>Dedicado a brindar la mejor experiencia a nuestros clientes, resolviendo sus dudas y necesidades.</p>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <div class="member-avatar">
+        <i class="fas fa-handshake"></i>
+      </div>
+      <div class="member-info">
+        <h4>Digitalización</h4>
+        <p class="member-role">Programación y Diseño</p>
+        <h3>Salvador Ariza</h3>
+        <p>Encargado de dar solución a problemas digitales y automatización práctica para su fácil uso.</p>
+      </div>
+    </div>
+    
+<div style="margin-top: 2px;"></div>
+
+      </div>
+
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div class="member-info">
+            <h4>Producción</h4>
+            <p class="member-role">Calidad y Procesos</p>
+            <h3>Todos Nosotros</h3>
+            <p>Supervisamos cada etapa del proceso productivo para garantizar la máxima calidad en todos nuestros productos.</p>
+          </div>
+        </div>
+
+    </section>
+
+    <section class="location-section">
+      <h2>Nuestra Ubicación</h2>
+      <p>Orgullosamente establecidos en Ciudad del Carmen, Campeche, desde donde llevamos nuestros productos naturales a toda la ciudad.</p>
+      
+      <div class="location-info">
+        <div class="location-card">
+          <div class="location-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3>Ciudad del Carmen</h3>
+          <p>Nuestra sede principal se encuentra en esta hermosa ciudad costera de Campeche, conocida por su rica tradición gastronómica.</p>
+        </div>
+
+        <div class="location-card">
+          <div class="location-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Entregas Locales</h3>
+          <p>Realizamos entregas directas en Ciudad del Carmen y sus alrededores, garantizando que nuestros productos lleguen frescos y en perfectas condiciones a tu hogar.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- modal para ir a tienda -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>¿Quieres ver los productos?</h2>
+      <p>Visita nuestra página <strong>Producto</strong> para explorar y comprar.</p>
+      <a href="tienda.html" class="modal-button">Ir a Producto</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function toggleCart() {
+      // Función para el carrito de compras
+      alert('Carrito de compras - Funcionalidad en desarrollo');
+    }
+
+    // Efecto de scroll suave para la navegación
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.value-card, .team-member, .location-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    });
+
+
+// para ir a la tienda
+    function toggleMobileMenu(){
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+    function avisarIrATienda(){
+      alert("Para ver y comprar los productos, por favor visita la página de Producto")
+    }
+
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function abrirModal() {
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    // Cierra el modal si haces clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById("cartModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

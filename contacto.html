@@ -1,0 +1,834 @@
+<!-- poner bien los correos -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Cacao Vital</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --cacao-base: #5C3A21;
+      --beige-organico: #EDE6DA;
+      --verde-natural: #7A8450;
+      --blanco-almendra: #FAF8F3;
+      --gris-ceniza: #3F3F3F;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--gris-ceniza);
+      background: var(--blanco-almendra);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 248, 243, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(92, 58, 33, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--cacao-base);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-menu li a {
+      text-decoration: none;
+      color: var(--gris-ceniza);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu li a:hover {
+      color: var(--cacao-base);
+    }
+
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--verde-natural);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+
+    .cart-icon {
+      background: var(--verde-natural);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cart-icon:hover {
+      background: var(--cacao-base);
+      transform: scale(1.05);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--cacao-base);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--cacao-base);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        border-top: 1px solid #ddd;
+        padding: 1rem 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--cacao-base), var(--verde-natural));
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .content-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-card {
+      background: var(--blanco-almendra);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      border: 2px solid var(--beige-organico);
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      border-color: var(--verde-natural);
+    }
+
+    .contact-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .contact-card h3 {
+      color: var(--cacao-base);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-role {
+      color: var(--verde-natural);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .contact-info {
+      margin-top: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .contact-item:hover {
+      background: var(--verde-natural);
+      color: white;
+    }
+
+    .contact-item i {
+      font-size: 1.1rem;
+      width: 20px;
+    }
+
+    .contact-item a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+    }
+
+    .general-info {
+      background: var(--beige-organico);
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .general-info h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--verde-natural);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .info-card h3 {
+      color: var(--cacao-base);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .info-card p {
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .form-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .form-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--cacao-base);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--beige-organico);
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      background: var(--blanco-almendra);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--verde-natural);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background: var(--verde-natural);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: var(--cacao-base);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .content-section {
+        padding: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 1.5rem;
+      }
+    }
+
+/* para ir a tienda */
+/* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--blanco-almendra);
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--verde-natural);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background-color: var(--cacao-base);
+    }
+
+    .close {
+      color: var(--cacao-base);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <span class="logo-text">Cacao Vital</span>
+      </a>
+      <ul class="nav-menu" id="mainNav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="tienda.html">Producto</a></li>
+        <li><a href="proceso.html">Proceso</a></li>
+        <li><a href="beneficios.html">Beneficios</a></li>
+        <li><a href="contacto.html" class="active">Contacto</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button class="cart-icon" onclick="abrirModal()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">+</span>
+        </button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>¡Contáctanos!</h1>
+      <p>Estamos aquí para atenderte. Cada miembro de nuestro equipo está especializado en diferentes áreas para brindarte el mejor servicio posible.</p>
+      <!-- que me lleve al whatsapp -->
+      <div>
+        <button
+          onclick="contactWhatsApp('+529381443562', 'Esther')"
+          style="background-color: var(--verde-natural); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease;">
+          <i class="fab fa-whatsapp" style="margin-right: 0.5rem;"></i> Has tu pedido
+        </button>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Nuestro Equipo de Contacto</h2>
+      <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">Conecta directamente con el miembro del equipo que mejor pueda ayudarte según tus necesidades.</p>
+      
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-avatar">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3>Esther Angeles</h3>
+          <p class="contact-role">Dirección General</p>
+          <p>Para consultas sobre la empresa, alianzas comerciales, mayoreo y distribución.</p>
+          
+          <div class="contact-info">
+            <div class="contact-item" onclick="contactWhatsApp('+529381443562', 'Esther')">
+              <i class="fab fa-whatsapp"></i>
+              <span>WhatsApp</span>
+            </div>
+            <div class="contact-item" onclick="contactEmail('esther@cacaovital.com')">
+              <i class="fas fa-envelope"></i>
+              <span>esther@cacaovital.com</span>
+            </div>
+            <div class="contact-item" onclick="contactPhone('+529381443562')">
+              <i class="fas fa-phone"></i>
+              <span>+52 938 144 35 62</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-avatar">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>Sergio Ariza</h3>
+          <p class="contact-role">Atención al Cliente</p>
+          <p>Para dudas sobre productos, pedidos, entregas y servicio post-venta.</p>
+          
+          <div class="contact-info">
+            <div class="contact-item" onclick="contactWhatsApp('+5219381223125', 'Sergio')">
+              <i class="fab fa-whatsapp"></i>
+              <span>WhatsApp</span>
+            </div>
+            <div class="contact-item" onclick="contactEmail('arizasergio@gmail.com')">
+              <i class="fas fa-envelope"></i>
+              <span>sergio@cacaovital.com</span>
+            </div>
+            <div class="contact-item" onclick="contactPhone('+5219381223125')">
+              <i class="fas fa-phone"></i>
+              <span>+52 938 122 3125</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-avatar">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Salvador Ariza</h3>
+          <p class="contact-role">Digitalización</p>
+          <p>Para soporte técnico, problemas con la web, pedidos online y automatización.</p>
+          
+          <div class="contact-info">
+            <div class="contact-item" onclick="contactWhatsApp('+529383190562', 'Salvador')">
+              <i class="fab fa-whatsapp"></i>
+              <span>WhatsApp</span>
+            </div>
+            <div class="contact-item" onclick="contactEmail('salvadorarizaangeles@gmail.com')">
+              <i class="fas fa-envelope"></i>
+              <span>salvadorarizaangeles@gmail.com</span>
+            </div>
+            <div class="contact-item" onclick="contactPhone('+529383190562')">
+              <i class="fas fa-phone"></i>
+              <span>+52 938 319 05 62</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="general-info">
+      <h2>Información General</h2>
+      <p>Encuentra toda la información que necesitas para contactarnos y conocer nuestros horarios de atención.</p>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3>Nuestra Ubicación</h3>
+          <p>Ciudad del Carmen, Campeche<br>
+          Realizamos entregas locales en toda la ciudad y sus alrededores.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>Horarios de Atención</h3>
+          <p>Lunes a Viernes: 7:00 AM - 7:00 pm<br>
+          Sabado y Domingo: Solo WhatsApp</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Entregas</h3>
+          <p>Entregas el mismo día (menos sabado y domingo) en Ciudad del Carmen<br>
+          ¡Consulta tiempos y costos en cualquier momento!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="form-section">
+      <h2>Formulario de Contacto</h2>
+      <p style="text-align: center; margin-bottom: 2rem;">¿No sabes con quién contactar? Llena este formulario y nosotros te dirigiremos con la persona correcta.</p>
+      
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label for="name">Nombre Completo *</label>
+          <input type="text" id="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electrónico *</label>
+          <input type="email" id="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Teléfono</label>
+          <input type="tel" id="phone">
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Asunto *</label>
+          <select id="subject" required>
+            <option value="">Selecciona un asunto</option>
+            <option value="producto">Consulta sobre productos</option>
+            <option value="pedido">Realizar pedido</option>
+            <option value="entrega">Consulta sobre entregas</option>
+            <option value="mayoreo">Ventas por mayoreo</option>
+            <option value="alianza">Alianzas comerciales</option>
+            <option value="tecnico">Soporte técnico</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mensaje *</label>
+          <textarea id="message" placeholder="Cuéntanos cómo podemos ayudarte..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Enviar Mensaje
+        </button>
+      </form>
+    </section>-->
+  </main>
+
+<!-- modal para ir a tienda -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>¿Quieres ver los productos?</h2>
+      <p>Visita nuestra página <strong>Producto</strong> para explorar y comprar.</p>
+      <a href="tienda.html" class="modal-button">Ir a Producto</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function toggleCart() {
+      alert('Carrito de compras - Funcionalidad en desarrollo');
+    }
+
+    function contactWhatsApp(number, name) {
+      const message = `Hola ${name}, vengo desde la página de Cacao Vital.`;
+      const url = `https://wa.me/${number.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    function contactEmail(email) {
+      const subject = 'Contacto desde página web - Cacao Vital';
+      const body = 'Hola, vengo desde la página de Cacao Vital.';
+      const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = url;
+    }
+
+    function contactPhone(phone) {
+      window.location.href = `tel:${phone}`;
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+      // Determinar a quién dirigir el mensaje
+      let targetPerson = 'Sergio'; // Por defecto atención al cliente
+      let targetNumber = '+529817654321';
+
+      if (subject === 'mayoreo' || subject === 'alianza') {
+        targetPerson = 'Esther';
+        targetNumber = '+529811234567';
+      } else if (subject === 'tecnico') {
+        targetPerson = 'Salvador';
+        targetNumber = '+529819876543';
+      }
+
+      const whatsappMessage = `Hola ${targetPerson}, soy ${name} y me contacto desde la página web de Cacao Vital.
+
+*Asunto:* ${subject}
+*Email:* ${email}
+${phone ? `*Teléfono:* ${phone}` : ''}
+
+*Mensaje:*
+${message}`;
+
+      const url = `https://wa.me/${targetNumber.replace(/\D/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(url, '_blank');
+      
+      // Limpiar formulario
+      document.querySelector('.contact-form').reset();
+      alert('¡Mensaje enviado! Te hemos dirigido con la persona correcta de nuestro equipo.');
+    }
+
+    // Efecto de scroll suave para las cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.contact-card, .info-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    });
+
+
+// para ir a la tienda
+    function toggleMobileMenu(){
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+    function avisarIrATienda(){
+      alert("Para ver y comprar los productos, por favor visita la página de Producto")
+    }
+
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function abrirModal() {
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    // Cierra el modal si haces clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById("cartModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

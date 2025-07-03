@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beneficios - Cacao Vital</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --cacao-base: #5C3A21;
+      --beige-organico: #EDE6DA;
+      --verde-natural: #7A8450;
+      --blanco-almendra: #FAF8F3;
+      --gris-ceniza: #3F3F3F;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--gris-ceniza);
+      background: var(--blanco-almendra);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 248, 243, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(92, 58, 33, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--cacao-base);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-menu li a {
+      text-decoration: none;
+      color: var(--gris-ceniza);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu li a:hover {
+      color: var(--cacao-base);
+    }
+
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--verde-natural);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+
+    .cart-icon {
+      background: var(--verde-natural);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cart-icon:hover {
+      background: var(--cacao-base);
+      transform: scale(1.05);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--cacao-base);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--cacao-base);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        border-top: 1px solid #ddd;
+        padding: 1rem 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--cacao-base), var(--verde-natural));
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--beige-organico);
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .content-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid var(--verde-natural);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--verde-natural);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .benefit-card h3 {
+      color: var(--cacao-base);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    .benefit-card p {
+      color: var(--gris-ceniza);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .nutritional-section {
+      background: var(--beige-organico);
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .nutritional-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .nutritional-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .nutrient-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .nutrient-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .nutrient-card h4 {
+      color: var(--cacao-base);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .nutrient-description {
+      color: var(--gris-ceniza);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .nutrient-benefit {
+      color: var(--verde-natural);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .comparison-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .comparison-table {
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+
+    .comparison-table table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .comparison-table th {
+      background: var(--cacao-base);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: var(--blanco-almendra);
+    }
+
+    .check-icon {
+      color: var(--verde-natural);
+      font-size: 1.2rem;
+    }
+
+    .cross-icon {
+      color: #e74c3c;
+      font-size: 1.2rem;
+    }
+
+    .testimonial-section {
+      background: linear-gradient(135deg, var(--verde-natural), var(--cacao-base));
+      color: white;
+      border-radius: 15px;
+      padding: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .testimonial-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-quote {
+      font-size: 1.3rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .content-section {
+        padding: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nutritional-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-table {
+        font-size: 0.9rem;
+      }
+    }
+
+
+/* para ir a tienda */
+/* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--blanco-almendra);
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--verde-natural);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background-color: var(--cacao-base);
+    }
+
+    .close {
+      color: var(--cacao-base);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <span class="logo-text">Cacao Vital</span>
+      </a>
+      <ul class="nav-menu" id="mainNav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="tienda.html">Producto</a></li>
+        <li><a href="proceso.html">Proceso</a></li>
+        <li><a href="beneficios.html" class="active">Beneficios</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button class="cart-icon" onclick="abrirModal()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">+</span>
+        </button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <section class="hero">
+      <h1>Beneficios del Cacao Natural</h1>
+      <p>Descubre las increíbles propiedades nutricionales y beneficios para la salud que ofrece nuestro cacao 100% natural, libre de químicos y conservantes.</p>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Natural</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Aditivos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Nutrientes</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>¿Por qué elegir Cacao Natural?</h2>
+      <p>El cacao natural es considerado uno de los "superalimentos" más poderosos del mundo. A diferencia del cacao procesado industrialmente, nuestro cacao conserva todas sus propiedades originales, ofreciendo una concentración excepcional de antioxidantes, minerales y compuestos bioactivos que benefician tu salud de múltiples maneras.</p>
+      
+      <p>Cuando eliges Cacao Vital, no solo disfrutas de un sabor auténtico y delicioso, sino que también proporcionas a tu cuerpo nutrientes esenciales que han sido venerados por las civilizaciones mesoamericanas durante miles de años. Nuestro proceso artesanal garantiza que cada grano mantenga su potencial nutritivo máximo.</p>
+    </section>
+
+    <section class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Salud Cardiovascular</h3>
+        <p>Rico en flavonoides que ayudan a mejorar la circulación sanguínea, reducir la presión arterial y fortalecer el sistema cardiovascular naturalmente.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h3>Función Cerebral</h3>
+        <p>Contiene compuestos que estimulan la producción de endorfinas y serotonina, mejorando el estado de ánimo y la función cognitiva.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Antioxidantes Poderosos</h3>
+        <p>Posee una de las concentraciones más altas de antioxidantes, superando incluso a los arándanos y el té verde en poder antioxidante.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-dumbbell"></i>
+        </div>
+        <h3>Energía Natural</h3>
+        <p>Proporciona energía sostenida sin los picos y caídas del azúcar, gracias a su contenido natural de teobromina y cafeína.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-bone"></i>
+        </div>
+        <h3>Minerales Esenciales</h3>
+        <p>Excelente fuente de magnesio, hierro, zinc y potasio, minerales fundamentales para el correcto funcionamiento del organismo.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-sun"></i>
+        </div>
+        <h3>Piel Saludable</h3>
+        <p>Los antioxidantes y minerales del cacao contribuyen a mantener una piel sana, protegiéndola del daño oxidativo.</p>
+      </div>
+    </section>
+
+    <br>
+    <br>
+
+    <section class="nutritional-section">
+      <h2>Perfil Nutricional</h2>
+      <p style="text-align: center; color: var(--gris-ceniza); margin-bottom: 2rem;">Cada porción de nuestro cacao natural te aporta:</p>
+      
+      <div class="nutritional-grid">
+        <div class="nutrient-card">
+          <div class="nutrient-icon">
+            <i class="fas fa-atom"></i>
+          </div>
+          <h4>Magnesio</h4>
+          <p class="nutrient-description">272mg por 100g</p>
+          <p class="nutrient-benefit">Función muscular y nerviosa</p>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">
+            <i class="fas fa-tint"></i>
+          </div>
+          <h4>Hierro</h4>
+          <p class="nutrient-description">13.9mg por 100g</p>
+          <p class="nutrient-benefit">Transporte de oxígeno</p>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h4>Zinc</h4>
+          <p class="nutrient-description">6.8mg por 100g</p>
+          <p class="nutrient-benefit">Sistema inmunológico</p>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">
+            <i class="fas fa-fire"></i>
+          </div>
+          <h4>Potasio</h4>
+          <p class="nutrient-description">1524mg por 100g</p>
+          <p class="nutrient-benefit">Equilibrio electrolítico</p>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">
+            <i class="fas fa-puzzle-piece"></i>
+          </div>
+          <h4>Fibra</h4>
+          <p class="nutrient-description">33.2g por 100g</p>
+          <p class="nutrient-benefit">Salud digestiva</p>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">
+            <i class="fas fa-drumstick-bite"></i>
+          </div>
+          <h4>Proteína</h4>
+          <p class="nutrient-description">19.6g por 100g</p>
+          <p class="nutrient-benefit">Construcción muscular</p>
+        </div>
+      </div>
+    </section>
+
+<!-- tabla -->
+
+    <section class="comparison-section">
+    <h2>Cacao Natural vs. Otros Superalimentos</h2>
+    <p style="text-align: center; margin-bottom: 2rem;">Compara nuestro cacao 100% natural frente a otros productos populares:</p>
+
+    <div class="comparison-table">
+        <table>
+        <thead>
+            <tr>
+            <th>Característica</th>
+            <th>Cacao Vital</th>
+            <th>Matcha</th>
+            <th>Maca</th>
+            <th>Chía</th>
+            <th>Cúrcuma</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td><strong>Antioxidantes</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Altísimo contenido</td>
+            <td><i class="fas fa-check check-icon"></i> Alto</td>
+            <td><i class="fas fa-times cross-icon"></i> Bajo</td>
+            <td><i class="fas fa-check check-icon"></i> Medio</td>
+            <td><i class="fas fa-check check-icon"></i> Alto</td>
+            </tr>
+            <tr>
+            <td><strong>Fuente de Magnesio</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Excelente</td>
+            <td><i class="fas fa-times cross-icon"></i> Muy bajo</td>
+            <td><i class="fas fa-times cross-icon"></i> Bajo</td>
+            <td><i class="fas fa-check check-icon"></i> Bueno</td>
+            <td><i class="fas fa-times cross-icon"></i> Muy bajo</td>
+            </tr>
+            <tr>
+            <td><strong>Estimulación Natural</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Teobromina equilibrada</td>
+            <td><i class="fas fa-check check-icon"></i> Alta cafeína</td>
+            <td><i class="fas fa-times cross-icon"></i> No aplica</td>
+            <td><i class="fas fa-times cross-icon"></i> No aplica</td>
+            <td><i class="fas fa-times cross-icon"></i> No aplica</td>
+            </tr>
+            <tr>
+            <td><strong>Sabor</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Intenso y auténtico</td>
+            <td><i class="fas fa-times cross-icon"></i> Astringente</td>
+            <td><i class="fas fa-times cross-icon"></i> Terroso</td>
+            <td><i class="fas fa-times cross-icon"></i> Neutro</td>
+            <td><i class="fas fa-times cross-icon"></i> Muy fuerte</td>
+            </tr>
+            <tr>
+            <td><strong>Historia y cultura</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Mesoamericana ancestral</td>
+            <td><i class="fas fa-check check-icon"></i> Tradición japonesa</td>
+            <td><i class="fas fa-check check-icon"></i> Andes peruanos</td>
+            <td><i class="fas fa-check check-icon"></i> Tradición azteca/maya</td>
+            <td><i class="fas fa-check check-icon"></i> Medicina ayurvédica</td>
+            </tr>
+            <tr>
+            <td><strong>Versatilidad en cocina</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Polvo, tableta, grano</td>
+            <td><i class="fas fa-check check-icon"></i> Solo bebidas</td>
+            <td><i class="fas fa-check check-icon"></i> Polvo energizante</td>
+            <td><i class="fas fa-check check-icon"></i> Batidos, yogur, agua</td>
+            <td><i class="fas fa-check check-icon"></i> Salsas, infusiones</td>
+            </tr>
+            <tr>
+            <td><strong>Contenido de azúcar natural</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Muy bajo</td>
+            <td><i class="fas fa-check check-icon"></i> Bajo</td>
+            <td><i class="fas fa-check check-icon"></i> Medio</td>
+            <td><i class="fas fa-times cross-icon"></i> Bajo</td>
+            <td><i class="fas fa-check check-icon"></i> Nulo</td>
+            </tr>
+            <tr>
+            <td><strong>Disponibilidad en México</strong></td>
+            <td><i class="fas fa-check check-icon"></i> Cosecha local</td>
+            <td><i class="fas fa-times cross-icon"></i> Importado</td>
+            <td><i class="fas fa-times cross-icon"></i> Importado</td>
+            <td><i class="fas fa-check check-icon"></i> Nacional</td>
+            <td><i class="fas fa-check check-icon"></i> Disponible en polvo</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    </section>
+
+
+    <!-- <section class="comparison-section">
+      <h2>Cacao Natural vs. Cacao Procesado</h2>
+      <p style="text-align: center; margin-bottom: 2rem;">Comprende las diferencias entre nuestro cacao natural y los productos procesados industrialmente:</p>
+      
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Cacao Vital (Natural)</th>
+              <th>Cacao Procesado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Antioxidantes</strong></td>
+              <td><i class="fas fa-check check-icon"></i> Máximo contenido</td>
+              <td><i class="fas fa-times cross-icon"></i> Reducidos hasta 90%</td>
+            </tr>
+            <tr>
+              <td><strong>Aditivos Químicos</strong></td>
+              <td><i class="fas fa-times check-icon"></i> Sin aditivos</td>
+              <td><i class="fas fa-check cross-icon"></i> Conservantes y químicos</td>
+            </tr>
+            <tr>
+              <td><strong>Sabor</strong></td>
+              <td><i class="fas fa-check check-icon"></i> Auténtico y rico</td>
+              <td><i class="fas fa-times cross-icon"></i> Alterado por procesamiento</td>
+            </tr>
+            <tr>
+              <td><strong>Nutrientes</strong></td>
+              <td><i class="fas fa-check check-icon"></i> Todos preservados</td>
+              <td><i class="fas fa-times cross-icon"></i> Pérdida significativa</td>
+            </tr>
+            <tr>
+              <td><strong>Alcalinización</strong></td>
+              <td><i class="fas fa-times check-icon"></i> Sin alcalinizar</td>
+              <td><i class="fas fa-check cross-icon"></i> Tratado con álcali</td>
+            </tr>
+            <tr>
+              <td><strong>Beneficios para la salud</strong></td>
+              <td><i class="fas fa-check check-icon"></i> Máximos beneficios</td>
+              <td><i class="fas fa-times cross-icon"></i> Beneficios reducidos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section> -->
+
+    <section class="testimonial-section">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <div class="testimonial-quote">
+        ¿Y si eres tú el primero en darnos una reseña? ¡Animate y prueba cacao!
+      </div>
+      <div class="testimonial-author">
+        - Aquí estará tu nombre ☺️
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Incorpora el Cacao Natural en tu Vida</h2>
+      <p>Integrar nuestro cacao natural en tu rutina diaria es simple y delicioso. Puedes disfrutarlo como bebida caliente o fría, agregarlo a tus smoothies, postres saludables, o incluso utilizarlo en recetas de cocina para potenciar el valor nutricional de tus comidas.</p>
+      
+      <p>Recomendamos consumir entre 1-2 cucharadas diarias para obtener todos los beneficios que el cacao natural puede ofrecerte. Recuerda que al elegir Cacao Vital, estás invirtiendo en tu salud y bienestar, mientras apoyas métodos de producción sustentables y artesanales.</p>
+      
+      <p>¡Descubre por ti mismo la diferencia que hace un cacao verdaderamente natural en tu vida!</p>
+    </section>
+  </main>
+
+<!-- modal para ir a tienda -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>¿Quieres ver los productos?</h2>
+      <p>Visita nuestra página <strong>Producto</strong> para explorar y comprar.</p>
+      <a href="tienda.html" class="modal-button">Ir a Producto</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function toggleCart() {
+      // Función para el carrito de compras
+      alert('Carrito de compras - Funcionalidad en desarrollo');
+    }
+
+    // Efecto de scroll suave para la navegación
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.benefit-card, .nutrient-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    });
+
+    // Animación de contadores en el hero
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      counters.forEach(counter => {
+        const target = counter.textContent;
+        const isPercentage = target.includes('%');
+        const numericTarget = parseInt(target.replace(/[^0-9]/g, ''));
+        
+        let current = 0;
+        const increment = numericTarget / 50;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= numericTarget) {
+            current = numericTarget;
+            clearInterval(timer);
+          }
+          
+          if (isPercentage) {
+            counter.textContent = Math.floor(current) + '%';
+          } else {
+            counter.textContent = Math.floor(current) + (target.includes('+') ? '+' : '');
+          }
+        }, 50);
+      });
+    }
+
+    // Iniciar animación cuando la página carga
+    window.addEventListener('load', () => {
+      setTimeout(animateCounters, 500);
+    });
+
+
+// para ir a la tienda
+    function toggleMobileMenu(){
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+    function avisarIrATienda(){
+      alert("Para ver y comprar los productos, por favor visita la página de Producto")
+    }
+
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function abrirModal() {
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    // Cierra el modal si haces clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById("cartModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

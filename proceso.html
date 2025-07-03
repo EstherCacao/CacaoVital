@@ -1,0 +1,815 @@
+<!-- PENDIENTE
+* Hacer que se puedan poner dos columnas en la seccion del proceso
+* Poner una imagen por cada paso del proceso
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proceso - Cacao Vital</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --cacao-base: #5C3A21;
+      --beige-organico: #EDE6DA;
+      --verde-natural: #7A8450;
+      --blanco-almendra: #FAF8F3;
+      --gris-ceniza: #3F3F3F;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--gris-ceniza);
+      background: var(--blanco-almendra);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 248, 243, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(92, 58, 33, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--cacao-base);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-menu li a {
+      text-decoration: none;
+      color: var(--gris-ceniza);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu li a:hover {
+      color: var(--cacao-base);
+    }
+
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--verde-natural);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+
+    .cart-icon {
+      background: var(--verde-natural);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cart-icon:hover {
+      background: var(--cacao-base);
+      transform: scale(1.05);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--cacao-base);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--cacao-base);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        border-top: 1px solid #ddd;
+        padding: 1rem 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--cacao-base), var(--verde-natural));
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .content-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+
+    .process-timeline {
+      margin-top: 3rem;
+    }
+
+    .timeline-step {
+      display: flex;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .timeline-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: 35px;
+      top: 70px;
+      bottom: -30px;
+      width: 2px;
+      background: var(--beige-organico);
+    }
+
+    .timeline-step:last-child::before {
+      display: none;
+    }
+
+    .step-number {
+      width: 70px;
+      height: 70px;
+      background: var(--verde-natural);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-right: 2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    .step-content {
+      flex: 1;
+      background: var(--blanco-almendra);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 2px solid var(--beige-organico);
+    }
+
+    .step-content h3 {
+      color: var(--cacao-base);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-content p {
+      color: var(--gris-ceniza);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .products-section {
+      background: var(--beige-organico);
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .products-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .product-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--cacao-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2.2rem;
+    }
+
+    .product-card h3 {
+      color: var(--cacao-base);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .product-card p {
+      color: var(--gris-ceniza);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .product-features li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      color: var(--verde-natural);
+      font-size: 0.9rem;
+    }
+
+    .product-features li i {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .quality-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .quality-section h2 {
+      color: var(--cacao-base);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .quality-card {
+      background: var(--blanco-almendra);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 2px solid var(--beige-organico);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      
+    }
+
+    .centered-card {
+        grid-column: 1 / -1; /* Ocupa toda la fila */
+        justify-self: center; /* Se centra horizontalmente */
+        width: 300px;
+        text-align: center;
+    }
+
+    .quality-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--verde-natural);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .quality-card h3 {
+      color: var(--cacao-base);
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .content-section {
+        padding: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .timeline-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .timeline-step::before {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 70px;
+      }
+
+      .step-number {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .beneficios-contenedor {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .beneficios-btn {
+        background: var(--cacao-base);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .beneficios-btn:hover {
+        background: var(--verde-natural);
+        transform: scale(1.05);
+    }
+
+
+/* para ir a tienda */
+/* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--blanco-almendra);
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--verde-natural);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background-color: var(--cacao-base);
+    }
+
+    .close {
+      color: var(--cacao-base);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <span class="logo-text">Cacao Vital</span>
+      </a>
+      <ul class="nav-menu" id="mainNav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="tienda.html">Producto</a></li>
+        <li><a href="proceso.html" class="active">Proceso</a></li>
+        <li><a href="beneficios.html">Beneficios</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button class="cart-icon" onclick="abrirModal()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">+</span>
+        </button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Nuestro Proceso Artesanal</h1>
+      <p>Descubre cómo transformamos los mejores granos de cacao en productos 100% naturales, siguiendo métodos tradicionales y manteniendo todas las propiedades nutritivas del cacao.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Del Grano al Producto Final</h2>
+      <p>En Cacao Vital seguimos un proceso artesanal cuidadosamente diseñado para preservar todas las propiedades naturales del cacao. Cada etapa es supervisada meticulosamente para garantizar la máxima calidad y pureza en nuestros productos finales.</p>
+      
+      <p>Nuestro compromiso con la excelencia nos lleva a realizar cada paso del proceso de manera tradicional, sin el uso de químicos, conservantes o aditivos artificiales. Desde la selección inicial hasta el empaque final, cada grano de cacao recibe el cuidado y atención que merece.</p>
+
+      <div class="process-timeline">
+        <div class="timeline-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Selección de Granos</h3>
+            <p>Comenzamos con una cuidadosa selección de los mejores granos de cacao. Cada grano es inspeccionado manualmente para asegurar que solo los de mayor calidad formen parte de nuestros productos. Eliminamos granos dañados, partidos o que no cumplan con nuestros estándares de excelencia.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Limpieza y Preparación</h3>
+            <p>Los granos seleccionados pasan por un proceso de limpieza exhaustiva para eliminar cualquier impureza, polvo o residuo. Utilizamos métodos naturales de limpieza que no involucran químicos, manteniendo la integridad original del grano.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Tostado Artesanal</h3>
+            <p>El tostado es una de las etapas más críticas de nuestro proceso. Tostamos los granos a temperatura controlada y por el tiempo exacto necesario para desarrollar el sabor característico del cacao sin perder sus propiedades nutricionales. Este proceso se realiza en pequeños lotes para garantizar uniformidad.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Descascarillado</h3>
+            <p>Una vez tostados, separamos cuidadosamente la cáscara del nibs de cacao. Este proceso se realiza de manera manual y mecánica para obtener el corazón puro del grano, rico en antioxidantes y nutrientes esenciales.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>Molienda y Procesamiento</h3>
+            <p>Los nibs de cacao pasan por diferentes procesos según el producto final deseado. Para el cacao en polvo, realizamos una molienda fina. Para las tabletas, creamos una pasta de cacao que luego moldeamos. El cacao entero tostado mantiene su forma original después del descascarillado.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">6</div>
+          <div class="step-content">
+            <h3>Control de Calidad y Empaque</h3>
+            <p>Cada lote pasa por rigurosos controles de calidad antes del empaque final. Verificamos textura, sabor, aroma y pureza. Empacamos nuestros productos en materiales que preservan la frescura y calidad, manteniendo todas las propiedades naturales del cacao.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section">
+      <h2>Nuestros Productos Finales</h2>
+      <p>A través de nuestro proceso artesanal, creamos tres productos principales, cada uno con características únicas y beneficios específicos.</p>
+      
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <h3>Cacao Entero Tostado</h3>
+          <p>Granos de cacao tostados y descascarillados, listos para consumir. Conservan todos sus nutrientes y ofrecen una experiencia de sabor intensa y auténtica.</p>
+          <ul class="product-features">
+            <li><i class="fas fa-check"></i> Rico en antioxidantes</li>
+            <li><i class="fas fa-check"></i> Alto contenido de fibra</li>
+            <li><i class="fas fa-check"></i> Fuente natural de magnesio</li>
+            <li><i class="fas fa-check"></i> Perfecto para snacks saludables</li>
+          </ul>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <h3>Cacao en Polvo</h3>
+          <p>Polvo fino obtenido de la molienda de los nibs de cacao. Ideal para preparar bebidas, postres y recetas saludables con el auténtico sabor del cacao.</p>
+          <ul class="product-features">
+            <li><i class="fas fa-check"></i> Sin azúcares añadidos</li>
+            <li><i class="fas fa-check"></i> Versatil para recetas</li>
+            <li><i class="fas fa-check"></i> Alto contenido proteico</li>
+            <li><i class="fas fa-check"></i> Fácil disolución</li>
+          </ul>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">
+            <i class="fas fa-square"></i>
+          </div>
+          <h3>Tabletas de Cacao</h3>
+          <p>Tabletas puras de cacao prensado, sin aditivos ni edulcorantes. Perfectas para derretir, rallar o consumir directamente para los amantes del cacao puro.</p>
+          <ul class="product-features">
+            <li><i class="fas fa-check"></i> 100% cacao puro</li>
+            <li><i class="fas fa-check"></i> Sin conservantes</li>
+            <li><i class="fas fa-check"></i> Larga duración</li>
+            <li><i class="fas fa-check"></i> Múltiples usos culinarios</li>
+          </ul>
+        </div>
+    </div>
+    <br>
+<!-- beneficios-btn -->
+        <div class="beneficios-contenedor">
+            <button class="beneficios-btn">Beneficios</button>
+        </div>
+    </section>
+
+    <section class="quality-section">
+      <h2>Garantía de Calidad</h2>
+      <p>Nuestro compromiso con la excelencia se refleja en cada etapa del proceso productivo.</p>
+      
+      <div class="quality-grid">
+        <div class="quality-card">
+          <div class="quality-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>100% Natural</h3>
+          <p>Sin químicos, conservantes, colorantes o aditivos artificiales en ninguna etapa del proceso.</p>
+        </div>
+
+        <div class="quality-card">
+          <div class="quality-icon">
+            <i class="fas fa-microscope"></i>
+          </div>
+          <h3>Control Riguroso</h3>
+          <p>Análisis de calidad en cada lote para garantizar pureza, sabor y propiedades nutricionales.</p>
+        </div>
+
+        <div class="quality-card">
+          <div class="quality-icon">
+            <i class="fas fa-hands"></i>
+          </div>
+          <h3>Proceso Artesanal</h3>
+          <p>Elaboración tradicional que respeta los tiempos naturales y preserva las características del cacao.</p>
+        </div>
+
+        <div class="quality-card centered-card">
+        <div class="quality-icon">
+            <i class="fas fa-certificate"></i>
+        </div>
+        <h3>Trazabilidad</h3>
+        <p>Seguimiento completo desde el origen del grano hasta el producto final en tus manos.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+<!-- modal para ir a tienda -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>¿Quieres ver los productos?</h2>
+      <p>Visita nuestra página <strong>Producto</strong> para explorar y comprar.</p>
+      <a href="tienda.html" class="modal-button">Ir a Producto</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function toggleCart() {
+      // Función para el carrito de compras
+      alert('Carrito de compras - Funcionalidad en desarrollo');
+    }
+
+    // Efecto de scroll suave para la navegación
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.product-card, .quality-card, .timeline-step');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+
+      // Animación especial para los números de los pasos
+      const stepNumbers = document.querySelectorAll('.step-number');
+      stepNumbers.forEach((step, index) => {
+        step.style.animationDelay = `${index * 0.2}s`;
+      });
+    });
+
+
+// para ir a la tienda
+    function toggleMobileMenu(){
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+    function avisarIrATienda(){
+      alert("Para ver y comprar los productos, por favor visita la página de Producto")
+    }
+
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+    }
+
+    function abrirModal() {
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    // Cierra el modal si haces clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById("cartModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

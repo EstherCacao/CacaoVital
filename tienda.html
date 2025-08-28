@@ -792,12 +792,12 @@
             </a>
 
             <nav class="nav-menu">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="tienda.html" class="active">Productos</a></li>
-                <li><a href="proceso.html">Proceso</a></li>
-                <li><a href="beneficios.html">Beneficios</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="https://esthercacao.github.io/CacaoVital/index.html" class="active">Inicio</a></li>
+                <li><a href="https://esthercacao.github.io/CacaoVital/nosotros.html">Nosotros</a></li>
+                <li><a href="https://esthercacao.github.io/CacaoVital/tienda.html">Producto</a></li>
+                <li><a href="https://esthercacao.github.io/CacaoVital/proceso.html">Proceso</a></li>
+                <li><a href="https://esthercacao.github.io/CacaoVital/beneficios.html">Beneficios</a></li>
+                <li><a href="https://esthercacao.github.io/CacaoVital/contacto.html">Contacto</a></li>
             </nav>
 
             <div style="display: flex; align-items: center; gap: 1rem;">
@@ -813,7 +813,14 @@
         </div>
     </header>
 
-    <h1>¡Nos descubriste! Estamos aún desarrollando esta página, solo faltan unos detalles para afinar, pero estará listo <strong>pronto</strong></h1>
+    <div style="text-align: center;">
+        <h1>¡Nos descubriste! Estamos aún desarrollando esta página, solo faltan unos detalles para afinar, pero estará listo <strong>pronto</strong><br><br>Pero puedes hacer tu pedido desde whatsapp ^^</h1>
+        <button
+            onclick="contactWhatsApp('+529381443562', 'Esther')"
+            style="background-color: var(--verde-natural); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; margin-top: 2rem;">
+            <i class="fab fa-whatsapp" style="margin-right: 0.5rem;"></i> Has tu pedido
+        </button>
+    </div>
 
     <section class="tienda-section">
         <h2 class="tienda-title">Nuestros Productos</h2>
@@ -832,7 +839,7 @@
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Cacao Entero Tostado</h3>
-                            <div class="product-price">$120 - $150 MXN</div>
+                            <div class="product-price">$367 MXN (x 500g)</div>
                             <p class="product-description">
                                 Granos de cacao cuidadosamente seleccionados y tostados artesanalmente para preservar 
                                 todos sus nutrientes y sabor natural. Perfectos para preparar tus propios licuados 
@@ -852,7 +859,7 @@
                                             </div>
                                             <div class="presentation-label">Sin azúcar</div>
                                             <div class="presentation-description">100% puro, sabor natural intenso</div>
-                                            <div class="precio-sin-entero">$120</div>
+                                            <div class="precio-sin-entero">$367</div>
                                             <div class="presentation-checkmark">
                                                 <i class="fas fa-check"></i>
                                             </div>
@@ -861,6 +868,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- <p style="font-style: italic; opacity: 0.95;">Ey, ¿quieres un descuento del 3.5%? Prueba a pedir tu producto via Whatsapp. 😉</p> -->
                             
                             <a href="#" class="more-info-link" onclick="showProductDetails('cacao-entero')">
                                 <i class="fas fa-info-circle"></i>
@@ -868,7 +877,14 @@
                             </a>
                             
                             <!-- agregar al carrito -->
-                            <button class="add-to-cart-btn" onclick="addToCart('cacao-entero')">
+
+                            <!-- descomentar para reactivar la funcion de agregar al carrito -->
+
+                            <!-- <button class="add-to-cart-btn" onclick="addToCart('cacao-entero')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Agregar al carrito
+                            </button> -->
+                            <button class="add-to-cart-btn" onclick="noAvailable()">
                                 <i class="fas fa-shopping-cart"></i>
                                 Agregar al carrito
                             </button>
@@ -884,7 +900,7 @@
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Cacao en polvo</h3>
-                            <div class="product-price">$80 - $110 MXN</div>
+                            <div class="product-price">$144 - $161 MXN (x 200g)</div>
                             <p class="product-description">
                                 Cacao molido finamente para obtener el polvo más puro y aromático. Ideal para 
                                 preparar bebidas calientes, postres, batidos y recetas de repostería. 
@@ -903,7 +919,7 @@
                                                 </div>
                                                 <div class="presentation-label">Con azúcar natural</div>
                                                 <div class="presentation-description">Endulzado con azúcar de caña orgánica</div>
-                                                <div class="precio-azucar-polvo">$120</div>
+                                                <div class="precio-azucar-polvo">$1</div> <!--$-->
                                                 <div class="presentation-checkmark">
                                                     <i class="fas fa-check"></i>
                                                 </div>
@@ -919,7 +935,7 @@
                                                 </div>
                                                 <div class="presentation-label">Para diabéticos</div>
                                                 <div class="presentation-description">Con edulcorante natural apto para diabéticos</div>
-                                                <div class="precio-diabeticos-polvo">$120</div>
+                                                <div class="precio-diabeticos-polvo">Aun no disponible</div> <!--$-->
                                                 <div class="presentation-checkmark">
                                                     <i class="fas fa-check"></i>
                                                 </div>
@@ -935,7 +951,7 @@
                                                 </div>
                                                 <div class="presentation-label">Sin azúcar</div>
                                                 <div class="presentation-description">100% puro, sabor natural intenso</div>
-                                                <div class="precio-sin-polvo">$120</div>
+                                                <div class="precio-sin-polvo">$153</div>
                                                 <div class="presentation-checkmark">
                                                     <i class="fas fa-check"></i>
                                                 </div>
@@ -944,13 +960,15 @@
                                     
                                 </div>
                             </div>
+
+                            <p style="font-style: italic; opacity: 0.95;">Ey, ¿quieres un descuento del 3.5%? Prueba a pedir tu producto via Whatsapp. 😉</p>
                             
                             <a href="#" class="more-info-link" onclick="showProductDetails('polvo-cacao')">
                                 <i class="fas fa-info-circle"></i>
                                 Más información sobre el proceso
                             </a>
                             
-                            <button class="add-to-cart-btn" onclick="addToCart('cacao-polvo')">
+                            <button class="add-to-cart-btn" onclick="noAvailable()">
                                 <i class="fas fa-shopping-cart"></i>
                                 Agregar al carrito
                             </button>
@@ -966,7 +984,7 @@
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Tabletas de Cacao</h3>
-                            <div class="product-price">$95 - $125 MXN</div>
+                            <div class="product-price">$ Aun no disponible MXN</div>
                             <p class="product-description">
                                 Deliciosas tabletas artesanales hechas con cacao 100% natural. Perfectas para 
                                 disfrutar como postre, derretir para preparar chocolate caliente o usar en 
@@ -985,7 +1003,7 @@
                                                 </div>
                                                 <div class="presentation-label">Con azúcar natural</div>
                                                 <div class="presentation-description">Endulzado con azúcar de caña orgánica</div>
-                                                <div class="precio-azucar-tableta">$120</div>
+                                                <div class="precio-azucar-tableta">Aun no disponible</div> <!--$-->
                                                 <div class="presentation-checkmark">
                                                     <i class="fas fa-check"></i>
                                                 </div>
@@ -1001,7 +1019,7 @@
                                                 </div>
                                                 <div class="presentation-label">Para diabéticos</div>
                                                 <div class="presentation-description">Con edulcorante natural apto para diabéticos</div>
-                                                <div class="precio-diabeticos-polvo">$120</div>
+                                                <div class="precio-diabeticos-polvo">Aun no disponible</div> <!--$-->
                                                 <div class="presentation-checkmark">
                                                     <i class="fas fa-check"></i>
                                                 </div>
@@ -1017,7 +1035,7 @@
                                                 </div>
                                                 <div class="presentation-label">Sin azúcar</div>
                                                 <div class="presentation-description">100% puro, sabor natural intenso</div>
-                                                <div class="precio-sin-polvo">$120</div>
+                                                <div class="precio-sin-polvo">Aun no disponible</div> <!--$-->
                                                 <div class="presentation-checkmark">
                                                     <i class="fas fa-check"></i>
                                                 </div>
@@ -1026,13 +1044,15 @@
                                     
                                 </div>
                             </div>
+
+                            <p style="font-style: italic; opacity: 0.95;">Ey, ¿quieres un descuento del 3.5%? Prueba a pedir tu producto via Whatsapp. 😉</p>
                             
                             <a href="#" class="more-info-link" onclick="showProductDetails('tabletas-cacao')">
                                 <i class="fas fa-info-circle"></i>
                                 Más información sobre el proceso
                             </a>
                             
-                            <button class="add-to-cart-btn" onclick="addToCart('cacao-tableta')">
+                            <button class="add-to-cart-btn" onclick="noAvailable()">
                                 <i class="fas fa-shopping-cart"></i>
                                 Agregar al carrito
                             </button>
@@ -1066,11 +1086,24 @@
         ✅ Producto agregado. Puedes ver tu carrito arriba a la derecha 🛒
         </div>
 
+        <h1>Aún no estan disponibles todos los productos, si quiere alguno no disponible puede contactarnos directamente via Whatsapp y serás de las primeras personas en probar nuestros productos nuevos. ¡Gracias por su comprensión! ☺️</h1>
     </section>
     <!--Js-->
     <script src="https://www.paypal.com/sdk/js?client-id=ARm5rqwcpdpTxac0c7h7cnN1eTIbMuSBInnzLRy6Y2CeU9jOcU2AS91NXETtsFJOxxkv8aS3fFpGFSVz&currency=MXN"></script>
 
     <script>
+
+//No Available//
+        function noAvailable() {
+            alert('⚠️ Esta función aún no está disponible, pronto estará en funcionamiento.')
+        }
+
+//Whatsapp contact//
+        function contactWhatsApp(number, name) {
+            const message = `Hola ${name}, vengo desde la página de Cacao Vital.`;
+            const url = `https://wa.me/${number.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
 
 //Paypal//
         paypal.Buttons({
